@@ -1,4 +1,5 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    object_pool
+    object_pool \
+    swap_sort_copy
