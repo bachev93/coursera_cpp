@@ -2,4 +2,5 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     athlets \
-    stack_vector
+    stack_vector \
+    translator
