@@ -4,4 +4,5 @@ SUBDIRS += \
     athlets \
     stack_vector \
     translator \
-    airport_counter
+    airport_counter \
+    text_editor
