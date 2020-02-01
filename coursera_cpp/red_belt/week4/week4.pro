@@ -5,4 +5,5 @@ SUBDIRS += \
     stack_vector \
     translator \
     airport_counter \
-    text_editor
+    text_editor \
+    server_stats

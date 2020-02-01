@@ -81,7 +81,8 @@ public:
 private:
     list<char> data_;
     list<char> exchangeBuff_;
-    list<char>::iterator currentPos_;
+    using Iterator = list<char>::iterator;
+    Iterator currentPos_;
 };
 
 void TypeText(Editor& editor, const string& text) {

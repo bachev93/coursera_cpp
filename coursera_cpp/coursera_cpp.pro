@@ -2,5 +2,4 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     red_belt \
-    white_belt \
-    yellow_belt
+    white_belt
