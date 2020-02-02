@@ -8,6 +8,9 @@ QMAKE_CXXFLAGS += -O2
 SOURCES += \
     airport_counter.cpp
 
-HEADERS += \
-    test_runner.h \
-    profile.h
+HEADERS +=
+
+unix:!macx: LIBS += -L$$OUT_PWD/../../red_belt_lib/ -lred_belt_lib
+
+INCLUDEPATH += $$PWD/../../red_belt_lib
+DEPENDPATH += $$PWD/../../red_belt_lib
