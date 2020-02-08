@@ -4,27 +4,38 @@
 #include <iterator>
 #include <numeric>
 #include <vector>
+#include <list>
 
 #include <iostream>
 
 using namespace std;
 
+
 template <typename RandomIt>
 void MakeJosephusPermutation(RandomIt first, RandomIt last, uint32_t step_size) {
+    list<typename RandomIt::value_type> pool;
+    move(first, last, back_inserter(pool));
 
+    auto listIt = pool.begin();
+    while(!pool.empty()) {
+        *(first++) = move(*listIt);
+        listIt = pool.erase(listIt);
 
+        if(pool.empty()) {
+            break;
+        }
 
+        if(listIt == pool.end()) {
+            listIt = pool.begin();
+        }
 
-//    vector<typename RandomIt::value_type> pool(first, last);
-//    size_t cur_pos = 0;
-//    while (!pool.empty()) {
-//        *(first++) = pool[cur_pos];
-//        pool.erase(pool.begin() + cur_pos);
-//        if (pool.empty()) {
-//            break;
-//        }
-//        cur_pos = (cur_pos + step_size - 1) % pool.size();
-//    }
+        for(auto cnt = step_size - 1; cnt != 0; --cnt) {
+            ++listIt;
+            if(listIt == pool.end()) {
+                listIt = pool.begin();
+            }
+        }
+    }
 }
 
 vector<int> MakeTestVector() {
@@ -52,7 +63,6 @@ void TestIntVector() {
 // Сейчас вы, возможно, не понимаете как он устроен, однако мы расскажем,
 // почему он устроен именно так, далее в блоке про move-семантику —
 // в видео «Некопируемые типы»
-
 struct NoncopyableInt {
     int value;
 
