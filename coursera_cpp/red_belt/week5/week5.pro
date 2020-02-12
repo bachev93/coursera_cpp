@@ -1,5 +1,6 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    josephus_permutation
+    josephus_permutation \
+    group_heavy_strings
 
