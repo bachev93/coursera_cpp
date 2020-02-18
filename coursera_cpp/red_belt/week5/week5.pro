@@ -4,4 +4,5 @@ SUBDIRS += \
     josephus_permutation \
     group_heavy_strings \
     simple_vector \
-    split_into_sentences
+    split_into_sentences \
+    simple_vector_2

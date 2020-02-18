@@ -4,10 +4,10 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-    simple_vector_copy_assignment.cpp
+    simple_vector_2.cpp
 
 HEADERS += \
-    simple_vector.h
+    simple_vector_2.h
 
 unix:!macx: LIBS += -L$$OUT_PWD/../../red_belt_lib/ -lred_belt_lib
 
