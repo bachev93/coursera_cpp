@@ -5,4 +5,5 @@ SUBDIRS += \
     group_heavy_strings \
     simple_vector \
     split_into_sentences \
-    simple_vector_2
+    simple_vector_2 \
+    merge_sort_3
