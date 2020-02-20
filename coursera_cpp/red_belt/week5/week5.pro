@@ -7,4 +7,5 @@ SUBDIRS += \
     split_into_sentences \
     simple_vector_2 \
     merge_sort_3 \
-    priority_collection
+    priority_collection \
+    matrix_sum
