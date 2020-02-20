@@ -6,4 +6,5 @@ SUBDIRS += \
     simple_vector \
     split_into_sentences \
     simple_vector_2 \
-    merge_sort_3
+    merge_sort_3 \
+    priority_collection
