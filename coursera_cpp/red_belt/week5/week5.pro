@@ -9,4 +9,5 @@ SUBDIRS += \
     merge_sort_3 \
     priority_collection \
     matrix_sum \
-    explore_key_words
+    explore_key_words \
+    synchronized
