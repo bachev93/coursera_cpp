@@ -10,4 +10,5 @@ SUBDIRS += \
     priority_collection \
     matrix_sum \
     explore_key_words \
-    synchronized
+    synchronized \
+    concurrent_map
