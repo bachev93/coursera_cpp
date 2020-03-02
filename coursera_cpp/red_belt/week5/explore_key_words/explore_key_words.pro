@@ -4,12 +4,15 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-    stack_vector.cpp
+    explore_key_words.cpp
 
-HEADERS += \
-    stack_vector.h
+QMAKE_CXXFLAGS += -pthread
+LIBS += -pthread
 
 unix:!macx: LIBS += -L$$OUT_PWD/../../red_belt_lib/ -lred_belt_lib
 
 INCLUDEPATH += $$PWD/../../red_belt_lib
 DEPENDPATH += $$PWD/../../red_belt_lib
+
+HEADERS += \
+    paginator.h

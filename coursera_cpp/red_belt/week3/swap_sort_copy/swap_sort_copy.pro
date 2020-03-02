@@ -6,5 +6,9 @@ CONFIG -= qt
 SOURCES += \
     swap_sort_copy.cpp
 
-HEADERS += \
-    test_runner.h
+HEADERS +=
+
+unix:!macx: LIBS += -L$$OUT_PWD/../../red_belt_lib/ -lred_belt_lib
+
+INCLUDEPATH += $$PWD/../../red_belt_lib
+DEPENDPATH += $$PWD/../../red_belt_lib

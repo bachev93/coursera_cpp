@@ -4,10 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-    stack_vector.cpp
-
-HEADERS += \
-    stack_vector.h
+    merge_sort_3.cpp
 
 unix:!macx: LIBS += -L$$OUT_PWD/../../red_belt_lib/ -lred_belt_lib
 
