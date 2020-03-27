@@ -133,7 +133,6 @@ void TestSpeedup() {
 }
 
 int main() {
-    //    cout << abs(-5) % 3 << endl;
     TestRunner tr;
     RUN_TEST(tr, TestConcurrentUpdate);
     RUN_TEST(tr, TestReadAndWrite);
