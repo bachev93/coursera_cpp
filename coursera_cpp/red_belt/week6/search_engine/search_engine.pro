@@ -20,4 +20,5 @@ HEADERS += \
     iterator_range.h \
     parse.h \
     search_server.h \
-    total_duration.h
+    total_duration.h \
+    synchronized.h
