@@ -12,7 +12,9 @@
 #include <fstream>
 #include <random>
 #include <thread>
+
 using namespace std;
+
 
 void TestFunctionality(
         const vector<string>& docs,
@@ -230,16 +232,16 @@ void testProductivity() {
     };
 
     const vector<string> initialQueries = {"moscow is the capital of russia",
-                                   "london",
-                                   "is the capital of",
-                                   "third rome",
-                                   "rome",
-                                   "is",
-                                   "the capital",
-                                   "bern is",
-                                   "warsaw",
-                                   "astana",
-                                   "hello world"};
+                                           "london",
+                                           "is the capital of",
+                                           "third rome",
+                                           "rome",
+                                           "is",
+                                           "the capital",
+                                           "bern is",
+                                           "warsaw",
+                                           "astana",
+                                           "hello world"};
 
 
     vector<string> docs(initialDocs);
@@ -265,11 +267,11 @@ void testProductivity() {
 
 int main() {
     TestRunner tr;
-//    RUN_TEST(tr, testProductivity);
+    //    RUN_TEST(tr, testProductivity);
 
-//    RUN_TEST(tr, TestSerpFormat);
-//    RUN_TEST(tr, TestTop5);
-//    RUN_TEST(tr, TestHitcount);
-//    RUN_TEST(tr, TestRanking);
-//    RUN_TEST(tr, TestBasicSearch);
+    //    RUN_TEST(tr, TestSerpFormat);
+    //    RUN_TEST(tr, TestTop5);
+    //    RUN_TEST(tr, TestHitcount);
+    //    RUN_TEST(tr, TestRanking);
+    //    RUN_TEST(tr, TestBasicSearch);
 }
