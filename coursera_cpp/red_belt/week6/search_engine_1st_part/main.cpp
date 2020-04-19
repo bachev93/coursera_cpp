@@ -265,9 +265,30 @@ void testProductivity() {
 
 }
 
+void testError() {
+    const vector<string> docs = {
+        "a   b c   d",
+        "  a b c d",
+        "   c  d e f   ",
+        "d  e f    g"};
+
+    const vector<string> queries = {" c d"};
+
+    const vector<string> expected = {
+        Join(' ', vector{"c d:",
+                         "{docid: 0, hitcount: 2}",
+                         "{docid: 1, hitcount: 2}",
+                         "{docid: 2, hitcount: 2}",
+                         "{docid: 3, hitcount: 1}"})};
+
+    TestFunctionality(docs, queries, expected);
+}
+
 int main() {
     TestRunner tr;
 //    RUN_TEST(tr, testProductivity);
+//    RUN_TEST(tr, testError);
+
 
     RUN_TEST(tr, TestSerpFormat);
     RUN_TEST(tr, TestTop5);

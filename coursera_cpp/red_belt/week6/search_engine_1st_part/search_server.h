@@ -5,25 +5,27 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <string_view>
+#include <deque>
 
 using namespace std;
 
+struct Entry {
+    size_t docID_, hitcount_;
+};
 
 class InvertedIndex {
 public:
     InvertedIndex() = default;
     void Add(string&& document);
-    const vector<pair<size_t, size_t>> Lookup(const string& word) const;
+    const vector<Entry>& Lookup(string_view word) const;
 
-    const string& GetDocument(size_t id) const {
-        return docs[id];
-    }
+    size_t getDocsSize() const;
 
 private:
-    //[слово]вектор{docID; количество повторений слова в одном документе}
-    map<string, vector<pair<size_t, size_t>>> map_index;
+    map<string_view, vector<Entry>> index_;
 
-    vector<string> docs;
+    deque<string> docs;
 };
 
 class SearchServer {
