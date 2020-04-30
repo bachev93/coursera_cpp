@@ -91,7 +91,7 @@ void InvertedIndex::Add(string&& document) {
     }
 }
 
-const vector<Entry>& InvertedIndex::Lookup(string_view word) const {
+const vector<Entry>& InvertedIndex::Lookup(const string_view& word) const {
     static const vector<Entry> empty;
 
     if(auto it = index_.find(word); it != index_.end()) {

@@ -17,8 +17,6 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
-    total_duration.h \
-    synchronized.h \
     search_server.h \
     parse.h \
     iterator_range.h

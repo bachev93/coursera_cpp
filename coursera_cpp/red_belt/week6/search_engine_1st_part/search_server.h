@@ -18,13 +18,11 @@ class InvertedIndex {
 public:
     InvertedIndex() = default;
     void Add(string&& document);
-    const vector<Entry>& Lookup(string_view word) const;
-
+    const vector<Entry>& Lookup(const string_view& word) const;
     size_t getDocsSize() const;
 
 private:
     map<string_view, vector<Entry>> index_;
-
     deque<string> docs;
 };
 

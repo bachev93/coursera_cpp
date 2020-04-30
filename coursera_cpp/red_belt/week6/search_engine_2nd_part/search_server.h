@@ -2,43 +2,35 @@
 
 #include <istream>
 #include <ostream>
-#include <set>
-#include <list>
 #include <vector>
 #include <map>
 #include <string>
-#include <set>
+#include <string_view>
 #include <future>
 #include <mutex>
 #include <deque>
 
-#include "synchronized.h"
-
 using namespace std;
+
+
+struct Entry {
+    size_t docID_, hitcount_;
+};
 
 class InvertedIndex {
 public:
+    InvertedIndex() = default;
     void Add(string&& document);
-    const vector<pair<size_t, size_t>>& Lookup(const string& word) const;
-
-    const string& GetDocument(size_t id) const {
-        return docs[id];
-    }
+    const vector<Entry>& Lookup(const string_view& word) const;
+    size_t getDocsSize() const;
 
     size_t GetNumDocs() const {
         return docs.size();
     }
 
 private:
-    //[слово]вектор{docID; количество повторений слова в одном документе}
-    map<string, vector<pair<size_t, size_t>>> map_index;
-
-    //[слово][docID] = индекс вектора пар для конкретного слова и документа
-//    map<string, map<size_t, size_t>> indexes;
-
-    vector<string> docs;
-
-    vector<pair<size_t, size_t>> empty_lookup_;
+    map<string_view, vector<Entry>> index_;
+    deque<string> docs;
 };
 
 class SearchServer {
@@ -51,7 +43,6 @@ public:
 private:
     InvertedIndex index;
     mutex mut_;
-//    Synchronized<InvertedIndex> index;
     vector<future<void>> futures_;
     bool firstDocUpdate = true;
 };
