@@ -7,7 +7,6 @@
 #include <future>
 #include <functional>
 #include <vector>
-#include <string_view>
 
 using namespace std;
 
@@ -197,5 +196,5 @@ void testSingleThread() {
 int main() {
     TestRunner tr;
     RUN_TEST(tr, TestBasic);
-    //    RUN_TEST(tr, testSingleThread);
+        RUN_TEST(tr, testSingleThread);
 }

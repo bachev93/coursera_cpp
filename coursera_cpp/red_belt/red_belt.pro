@@ -5,4 +5,5 @@ SUBDIRS += \
     week3 \
     week4 \
     week5 \
-    red_belt_lib
+    red_belt_lib \
+    week6
