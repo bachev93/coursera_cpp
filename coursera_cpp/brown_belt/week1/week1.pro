@@ -1,4 +1,5 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    hash_set
+    hash_set \
+    set_iterator_next
