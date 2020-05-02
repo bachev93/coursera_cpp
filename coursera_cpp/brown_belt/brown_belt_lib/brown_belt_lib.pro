@@ -1,15 +1,15 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2020-02-02T22:09:59
+# Project created by QtCreator 2020-04-30T19:56:00
 #
 #-------------------------------------------------
 
 QT       -= core gui
 
-TARGET = red_belt_lib
+TARGET = brown_belt_lib
 TEMPLATE = lib
 
-DEFINES += RED_BELT_LIB_LIBRARY
+DEFINES += BROWN_BELT_LIB_LIBRARY
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
