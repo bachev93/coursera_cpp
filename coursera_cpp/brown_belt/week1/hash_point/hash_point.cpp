@@ -16,14 +16,14 @@ struct Point3D {
 
     bool operator==(const Point3D& other) const {
         // реализуйте оператор
-        return x == other.x && y == other.y && z == other.z;
+        return tie(x, y ,z) == tie(other.x, other.y, other.x);
     }
 };
 
 struct Hasher {
     // реализуйте структуру
-    //Ax^2 + Bx + C
     size_t operator()(const Point3D& p) const {
+        //Ax^2 + Bx + C
         const auto a = coordHash(p.x);
         const auto b = coordHash(p.y);
         const auto c = coordHash(p.z);
