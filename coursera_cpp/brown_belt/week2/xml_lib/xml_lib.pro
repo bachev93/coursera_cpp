@@ -6,12 +6,12 @@
 
 QT       -= core gui
 
-TARGET = week2_brown_belt_lib
+TARGET = xml_lib
 TEMPLATE = lib
 
 CONFIG += c++1z
 
-DEFINES += WEEK2_BROWN_BELT_LIB_LIBRARY
+DEFINES += XML_LIB_LIBRARY
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
