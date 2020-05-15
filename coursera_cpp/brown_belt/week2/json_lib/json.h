@@ -7,6 +7,7 @@
 #include <map>
 using namespace std;
 
+namespace Json {
 class Node {
 public:
   explicit Node(vector<Node> array);
@@ -37,4 +38,4 @@ private:
 };
 
 Document Load(istream& input);
-
+}   //namespace Json

@@ -4,6 +4,7 @@
 #include <iostream>
 using namespace std;
 
+namespace Xml {
 pair<string_view, string_view> Split(string_view line, char by) {
   size_t pos = line.find(by);
   string_view left = line.substr(0, pos);
@@ -82,4 +83,4 @@ void Node::AddChild(Node node) {
 string_view Node::Name() const {
   return name;
 }
-
+}   //namespace Xml

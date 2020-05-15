@@ -42,7 +42,7 @@ string MostExpensiveCategory(
 }
 
 vector<Spending> LoadFromXml(istream& input) {
-    const auto doc = Load(input);
+    const auto doc = Xml::Load(input);
     vector<Spending> result;
     for(const auto& node : doc.GetRoot().Children()) {
         result.push_back({node.AttributeValue<string>("category"),
@@ -76,14 +76,16 @@ void TestLoadFromXml() {
 
 void TestXmlLibrary() {
     // Тест демонстрирует, как пользоваться библиотекой из файла xml.h
-
     istringstream xml_input(R"(<july>
                             <spend amount="2500" category="food"></spend>
                             <spend amount="23740" category="travel"></spend>
                             <spend amount="12000" category="sport"></spend>
                             </july>)");
 
-    Document doc = Load(xml_input);
+    using Document = Xml::Document;
+    using Node = Xml::Node;
+
+    Document doc = Xml::Load(xml_input);
     const Node& root = doc.GetRoot();
     ASSERT_EQUAL(root.Name(), "july");
     ASSERT_EQUAL(root.Children().size(), 3u);

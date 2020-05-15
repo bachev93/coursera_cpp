@@ -42,8 +42,7 @@ string MostExpensiveCategory(
 }
 
 vector<Spending> LoadFromJson(istream& input) {
-    // Реализуйте эту функцию с помощью библиотеки json.h
-    const auto doc = Load(input);
+    const auto doc = Json::Load(input);
     vector<Spending> result;
     for(const auto& node : doc.GetRoot().AsArray()) {
         result.push_back({node.AsMap().at("category").AsString(),
@@ -84,7 +83,10 @@ void TestJsonLibrary() {
                              {"amount": 12000, "category": "sport"}
                              ])");
 
-    Document doc = Load(json_input);
+    using Node = Json::Node;
+    using Document = Json::Document;
+
+    Document doc = Json::Load(json_input);
     const vector<Node>& root = doc.GetRoot().AsArray();
     ASSERT_EQUAL(root.size(), 3u);
 

@@ -8,6 +8,7 @@
 #include <unordered_map>
 using namespace std;
 
+namespace Xml {
 class Node {
 public:
   Node(string name, unordered_map<string, string> attrs);
@@ -38,8 +39,6 @@ private:
 Document Load(istream& input);
 
 
-
-
 template <typename T>
 inline T Node::AttributeValue(const string& name) const {
   istringstream attr_input(attrs.at(name));
@@ -47,4 +46,4 @@ inline T Node::AttributeValue(const string& name) const {
   attr_input >> result;
   return result;
 }
-
+}   //namespace Xml
