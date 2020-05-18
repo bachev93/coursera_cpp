@@ -35,8 +35,9 @@ Document Load(istream &input) {
         string_view str(line);
         if(str.find('[') != str.npos) {
             auto openBracketPos = str.find_first_of('[');
+            ++openBracketPos;
             auto closeBracketPos = str.find_first_of(']');
-            auto sectionName = str.substr(++openBracketPos, closeBracketPos - openBracketPos - 1);
+            auto sectionName = str.substr(openBracketPos, closeBracketPos - openBracketPos);
             section = &doc.AddSection(string(sectionName));
         } else if(str.find('=') != str.npos) {
             const auto [key, value] = parseString(str);
