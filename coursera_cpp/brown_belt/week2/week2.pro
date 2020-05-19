@@ -7,4 +7,5 @@ SUBDIRS += \
     spendings_xml \
     spendings_json \
     test_ini \
-    refactoring
+    refactoring \
+    restructuring
