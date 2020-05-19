@@ -6,4 +6,5 @@ SUBDIRS += \
     ini_lib \
     spendings_xml \
     spendings_json \
-    test_ini
+    test_ini \
+    refactoring

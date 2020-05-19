@@ -6,24 +6,24 @@
 #include <string>
 #include <string_view>
 #include <unordered_map>
-using namespace std;
 
 namespace Xml {
+
 class Node {
 public:
-  Node(string name, unordered_map<string, string> attrs);
+  Node(std::string name, std::unordered_map<std::string, std::string> attrs);
 
-  const vector<Node>& Children() const;
+  const std::vector<Node>& Children() const;
   void AddChild(Node node);
-  string_view Name() const;
+  std::string_view Name() const;
 
   template <typename T>
-  T AttributeValue(const string& name) const;
+  T AttributeValue(const std::string& name) const;
 
 private:
-  string name;
-  vector<Node> children;
-  unordered_map<string, string> attrs;
+  std::string name;
+  std::vector<Node> children;
+  std::unordered_map<std::string, std::string> attrs;
 };
 
 class Document {
@@ -36,14 +36,17 @@ private:
   Node root;
 };
 
-Document Load(istream& input);
+Document Load(std::istream& input);
+
+
 
 
 template <typename T>
-inline T Node::AttributeValue(const string& name) const {
-  istringstream attr_input(attrs.at(name));
+inline T Node::AttributeValue(const std::string& name) const {
+  std::istringstream attr_input(attrs.at(name));
   T result;
   attr_input >> result;
   return result;
 }
-}   //namespace Xml
+
+}
