@@ -8,4 +8,5 @@ SUBDIRS += \
     spendings_json \
     test_ini \
     refactoring \
-    restructuring
+    restructuring \
+    collide
