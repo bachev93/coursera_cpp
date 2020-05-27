@@ -9,4 +9,5 @@ SUBDIRS += \
     test_ini \
     refactoring \
     restructuring \
-    collide
+    collide \
+    comment_server
