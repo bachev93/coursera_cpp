@@ -5,4 +5,5 @@ SUBDIRS += \
     lazy_value \
     synchronized_2 \
     concurrent_map_2 \
-    polynomial
+    polynomial \
+    object_pool
