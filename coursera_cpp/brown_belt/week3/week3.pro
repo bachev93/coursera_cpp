@@ -6,4 +6,5 @@ SUBDIRS += \
     synchronized_2 \
     concurrent_map_2 \
     polynomial \
-    object_pool
+    object_pool \
+    zoo
