@@ -7,4 +7,5 @@ SUBDIRS += \
     concurrent_map_2 \
     polynomial \
     object_pool \
-    zoo
+    zoo \
+    pipeline
