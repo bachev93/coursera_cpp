@@ -8,4 +8,5 @@ SUBDIRS += \
     polynomial \
     object_pool \
     zoo \
-    pipeline
+    pipeline \
+    expression_tree
