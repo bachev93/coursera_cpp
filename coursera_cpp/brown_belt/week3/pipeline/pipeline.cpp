@@ -10,10 +10,6 @@ using namespace std;
 
 
 struct Email {
-//    Email(const string& from_, const string& to_, const string& body_)
-//        : from(from_), to(to_), body(body_) {}
-//    Email() = default;
-
     string from;
     string to;
     string body;
