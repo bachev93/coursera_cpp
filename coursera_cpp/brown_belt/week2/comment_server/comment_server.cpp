@@ -141,7 +141,7 @@ public:
     }
 
 private:
-    const int SPAM_LIMIT = 3;
+    const size_t SPAM_LIMIT = 3;
 
     struct UserInfo {
         bool isBanned_ = false;
