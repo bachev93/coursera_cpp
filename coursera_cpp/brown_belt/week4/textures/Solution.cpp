@@ -2,171 +2,99 @@
 
 using namespace std;
 
-// Этот файл сдаётся на проверку
-// Здесь напишите реализацию необходимых классов-потомков `IShape`
-class Rectangle : public IShape {
+// Точка передаётся в локальных координатах
+bool IsPointInSize(Point p, Size s) {
+  return p.x >= 0 && p.y >= 0 && p.x < s.width && p.y < s.height;
+}
+
+Size GetImageSize(const Image& image) {
+  auto width = static_cast<int>(image.empty() ? 0 : image[0].size());
+  auto height = static_cast<int>(image.size());
+  return {width, height};
+}
+
+class Shape : public IShape {
 public:
-    Rectangle(const Point& point, const Size& size,
-              const shared_ptr<ITexture>& texture)
-        : position_(point), size_(size), texture_(texture) {}
+  void SetPosition(Point position) override {
+    position_ = position;
+  }
+  Point GetPosition() const override {
+    return position_;
+  }
 
-    Rectangle()
-        : position_(), size_(), texture_() {}
+  void SetSize(Size size) override {
+    size_ = size;
+  }
+  Size GetSize() const override {
+    return size_;
+  }
 
-    unique_ptr<IShape> Clone() const override {
-        return make_unique<Rectangle>(position_, size_, texture_);
-    }
+  void SetTexture(shared_ptr<ITexture> texture) override {
+    texture_ = move(texture);
+  }
+  ITexture* GetTexture() const override {
+    return texture_.get();
+  }
 
-    void SetPosition(Point p) override {
-        position_ = move(p);
-    }
-
-    Point GetPosition() const override {
-        return position_;
-    }
-
-    void SetSize(Size size) override {
-        size_ = move(size);
-    }
-
-    Size GetSize() const override {
-        return size_;
-    }
-
-    void SetTexture(shared_ptr<ITexture> texture) override {
-        texture_ = move(texture);
-    }
-
-    ITexture* GetTexture() const override {
-        return texture_.get();
-    }
-
-    void Draw(Image& img) const override {
-        // количество пикселей по координате x, которые необходимо закрасить
-        // '.' по умолчанию
-        auto xFill = min<int>(img[0].size() - position_.x, size_.width);
-
-        // то же для координаты y
-        auto yFill = min<int>(img.size() - position_.y, size_.height);
-
-        for(auto it = img.begin() + position_.y, itEnd = it + yFill;
-            it != itEnd; ++it) {
-            auto strItBegin = it->begin() + position_.x;
-            auto strItEnd = strItBegin + xFill;
-            fill(strItBegin, strItEnd, '.');
+  void Draw(Image& image) const override {
+    Point p;
+    auto image_size = GetImageSize(image);
+    for (p.y = 0; p.y < size_.height; ++p.y) {
+      for (p.x = 0; p.x < size_.width; ++p.x) {
+        if (IsPointInShape(p)) {
+          char pixel = '.';
+          if (texture_ && IsPointInSize(p, texture_->GetSize())) {
+            pixel = texture_->GetImage()[p.y][p.x];
+          }
+          Point dp = {position_.x + p.x, position_.y + p.y};
+          if (IsPointInSize(dp, image_size)) {
+            image[dp.y][dp.x] = pixel;
+          }
         }
-
-        if(texture_) {
-            xFill = min(xFill, texture_->GetSize().width);
-            yFill = min(yFill, texture_->GetSize().height);
-
-            const auto& textureImg = texture_->GetImage();
-
-            for(int col = 0, I = yFill; col < I; ++col) {
-                for(int row = 0, J = xFill; row < J; ++row) {
-                    img[col + position_.y][row + position_.x] = textureImg[col][row];
-                }
-            }
-        }
+      }
     }
+  }
 
 private:
-    Point position_;
-    Size size_;
-    shared_ptr<ITexture> texture_;
+  // Вызывается только для точек в ограничивающем прямоугольнике
+  // Точка передаётся в локальных координатах
+  virtual bool IsPointInShape(Point) const = 0;
+
+  shared_ptr<ITexture> texture_;
+  Point position_ = {};
+  Size size_ = {};
 };
 
-class Ellipse : public IShape {
+class Rectangle : public Shape {
 public:
-    Ellipse(const Point& point, const Size& size,
-            const shared_ptr<ITexture>& texture)
-        : position_(point), size_(size), texture_(texture) {}
-
-    Ellipse()
-        : position_(), size_(), texture_() {}
-
-    unique_ptr<IShape> Clone() const override {
-        return make_unique<Ellipse>(position_, size_, texture_);
-    }
-
-    void SetPosition(Point p) override {
-        position_ = move(p);
-    }
-
-    Point GetPosition() const override {
-        return position_;
-    }
-
-    void SetSize(Size size) override {
-        size_ = move(size);
-    }
-
-    Size GetSize() const override {
-        return size_;
-    }
-
-    void SetTexture(shared_ptr<ITexture> texture) override {
-        texture_ = move(texture);
-    }
-
-    ITexture* GetTexture() const override {
-        return texture_.get();
-    }
-
-    void Draw(Image& img) const override {
-        // заливка по умолчанию
-        // размеры ограничивающего прямоугольника, вписанного в картинку Image
-        // координата x
-        auto xBorder = min<int>(img[0].size() - position_.x, size_.width);
-        // координата y
-        auto yBorder = min<int>(img.size() - position_.y, size_.height);
-
-        for(auto col = 0, I = yBorder; col < I; ++col) {
-            for(auto row = 0, J = xBorder; row < J; ++row) {
-                if(IsPointInEllipse({row, col}, size_)) {
-                    img[col + position_.y][row + position_.x] = '.';
-                }
-            }
-        }
-
-        if(texture_) {
-            // ограниичивающий прямоугольник у текстуры
-            // координата x
-            xBorder = min(xBorder, texture_->GetSize().width);
-            // координата y
-            yBorder = min(yBorder, texture_->GetSize().height);
-
-            const auto& textureImg = texture_->GetImage();
-
-            for(int col = 0, I = yBorder; col < I; ++col) {
-                for(int row = 0, J = xBorder; row < J; ++row) {
-                    if(IsPointInEllipse({row, col}, size_)) {
-                        img[col + position_.y][row + position_.x] = textureImg[col][row];
-                    }
-                }
-            }
-        }
-    }
+  unique_ptr<IShape> Clone() const override {
+    return make_unique<Rectangle>(*this);
+  }
 
 private:
-    Point position_;
-    Size size_;
-    shared_ptr<ITexture> texture_;
+  bool IsPointInShape(Point) const override {
+    return true;
+  }
 };
 
+class Ellipse : public Shape {
+public:
+  unique_ptr<IShape> Clone() const override {
+    return make_unique<Ellipse>(*this);
+  }
 
-// Напишите реализацию функции
+private:
+  bool IsPointInShape(Point p) const override {
+    return IsPointInEllipse(p, GetSize());
+  }
+};
+
 unique_ptr<IShape> MakeShape(ShapeType shape_type) {
-    unique_ptr<IShape> shape;
-
-    switch(shape_type) {
+  switch (shape_type) {
     case ShapeType::Rectangle:
-        shape = move(make_unique<Rectangle>());
-        break;
+      return make_unique<Rectangle>();
     case ShapeType::Ellipse:
-        shape = move(make_unique<Ellipse>());
-        break;
-    }
-
-   return shape;
+      return make_unique<Ellipse>();
+  }
+  return nullptr;
 }
