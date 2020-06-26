@@ -13,7 +13,7 @@ public:
             shared_ptr<IBooksUnpacker> books_unpacker,
             const Settings& settings
             ) : booksUnpacker_(move(books_unpacker)), settings_(settings),
-                currentCommonSize_(), mut_(), rangedBooks_(), bookByName_() {
+        currentCommonSize_(), mut_(), rangedBooks_(), bookByName_() {
         // реализуйте метод
     }
 
@@ -21,14 +21,11 @@ public:
         lock_guard guard(mut_);
         // реализуйте метод
         if(bookByName_.count(book_name)) {
-//            lock_guard guard(mut_);
-
             BookPtr bookPtr = move(*bookByName_[book_name]);
             rangedBooks_.erase(bookByName_[book_name]);
             rangedBooks_.push_back(move(bookPtr));
             bookByName_[book_name] = --rangedBooks_.end();
         } else {
-//            lock_guard guard(mut_);
             auto book = booksUnpacker_->UnpackBook(book_name);
 
             if(book->GetContent().size() > settings_.max_memory) {
