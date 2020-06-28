@@ -2,4 +2,5 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     textures \
-    cache
+    cache \
+    unique_ptr
