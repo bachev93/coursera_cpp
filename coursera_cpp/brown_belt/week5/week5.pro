@@ -5,4 +5,5 @@ SUBDIRS += \
     ebook \
     expresses \
     team_tasks \
-    booking_system
+    booking_system \
+    print_stats_test
