@@ -6,4 +6,5 @@ SUBDIRS += \
     expresses \
     team_tasks \
     booking_system \
-    print_stats_test
+    print_stats_test \
+    domains

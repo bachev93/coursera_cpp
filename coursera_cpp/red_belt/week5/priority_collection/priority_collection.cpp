@@ -94,7 +94,7 @@ public:
 
 void TestNoCopy() {
     PriorityCollection<StringNonCopyable> strings;
-    const auto white_id = strings.Add("white");
+//    const auto white_id = strings.Add("white");
     const auto yellow_id = strings.Add("yellow");
     const auto red_id = strings.Add("red");
 

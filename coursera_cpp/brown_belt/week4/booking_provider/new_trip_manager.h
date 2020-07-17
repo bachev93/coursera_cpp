@@ -32,7 +32,7 @@ public:
         string date_to;
     };
 
-    Trip Book(const BookingData& data) {
+    Trip Book(const BookingData&) {
         Trip trip;
         {
             FlightProvider::BookingData data;

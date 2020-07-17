@@ -155,12 +155,12 @@ void TestCpp() {
     // Горизонтальные чёрточки плюсов
     auto h1 = canvas.AddShape(ShapeType::Rectangle, {54, 7}, {22, 3},
                               MakeTextureSolid({100, 100}, '+'));
-    auto h2 = canvas.DuplicateShape(h1, {30, 7});
+//    auto h2 = canvas.DuplicateShape(h1, {30, 7});
 
     // Вертикальные чёрточки плюсов
     auto v1 = canvas.DuplicateShape(h1, {62, 3});
     canvas.ResizeShape(v1, {6, 11});
-    auto v2 = canvas.DuplicateShape(v1, {38, 3});
+//    auto v2 = canvas.DuplicateShape(v1, {38, 3});
 
     stringstream output;
     canvas.Print(output);

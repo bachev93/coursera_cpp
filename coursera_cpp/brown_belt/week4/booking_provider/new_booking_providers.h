@@ -20,7 +20,7 @@ public:
         string date;
     };
 
-    Booking Book(const BookingData& data) {
+    Booking Book(const BookingData& ) {
         if (counter >= capacity) {
             throw runtime_error("Flight overbooking");
         }
@@ -30,7 +30,7 @@ public:
 
 private:
     // Скрываем эту функцию в private, чтобы её мог позвать только соответствующий friend-класс Booking
-    void CancelOrComplete(const Booking& booking) {
+    void CancelOrComplete(const Booking& ) {
         --counter;
     }
 
@@ -52,7 +52,7 @@ public:
         string date_to;
     };
 
-    Booking Book(const BookingData& data) {
+    Booking Book(const BookingData& ) {
         if (counter >= capacity) {
             throw runtime_error("Hotel overbooking");
         }
@@ -61,7 +61,7 @@ public:
     }
 
 private:
-    void CancelOrComplete(const Booking& booking) {
+    void CancelOrComplete(const Booking& ) {
         --counter;
     }
 
