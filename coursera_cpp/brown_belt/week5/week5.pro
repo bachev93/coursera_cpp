@@ -7,4 +7,5 @@ SUBDIRS += \
     team_tasks \
     booking_system \
     print_stats_test \
-    domains
+    domains \
+    test_domains
