@@ -8,4 +8,5 @@ SUBDIRS += \
     booking_system \
     print_stats_test \
     domains \
-    test_domains
+    test_domains \
+    budget_home_desktop
