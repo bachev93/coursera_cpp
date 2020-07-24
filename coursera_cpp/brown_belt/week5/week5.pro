@@ -9,4 +9,5 @@ SUBDIRS += \
     print_stats_test \
     domains \
     test_domains \
-    budget_home_desktop
+    budget_home_desktop \
+    budget_professional_desktop
