@@ -2,8 +2,8 @@
 #include "test_runner.h"
 
 #include <numeric>
-#include <vector>
 #include <tuple>
+#include <vector>
 
 using namespace std;
 

@@ -1,7 +1,7 @@
 #include "stack_vector.h"
 
-#include "test_runner.h"
 #include "profile.h"
+#include "test_runner.h"
 
 #include <random>
 #include <stdexcept>
@@ -59,17 +59,17 @@ void TestPopBack() {
 }
 
 void test() {
-    StackVector<int, 5> v;
+  StackVector<int, 5> v;
 
-    ASSERT(v.begin() == v.end());
+  ASSERT(v.begin() == v.end());
 
-    for (size_t i = 1; i <= v.Capacity(); ++i) {
-      v.PushBack(i);
-    }
+  for (size_t i = 1; i <= v.Capacity(); ++i) {
+    v.PushBack(i);
+  }
 
-    ASSERT_EQUAL(*v.begin(), 1);
-    ASSERT_EQUAL(*prev(v.end()), 5);
-    ASSERT_EQUAL(v[1], 2);
+  ASSERT_EQUAL(*v.begin(), 1);
+  ASSERT_EQUAL(*prev(v.end()), 5);
+  ASSERT_EQUAL(v[1], 2);
 }
 
 int main() {

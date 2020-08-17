@@ -3,8 +3,8 @@
 
 #include <algorithm>
 #include <iostream>
-#include <vector>
 #include <string>
+#include <vector>
 using namespace std;
 
 void TestConstruction() {
@@ -36,7 +36,7 @@ void TestPushBack() {
 }
 
 class StringNonCopyable : public string {
-public:
+ public:
   using string::string;
   StringNonCopyable(string&& other) : string(move(other)) {}
   StringNonCopyable(const StringNonCopyable&) = delete;

@@ -8,51 +8,46 @@
 using namespace std;
 
 struct Spending {
-    string category;
-    int amount;
+  string category;
+  int amount;
 };
 
-bool operator == (const Spending& lhs, const Spending& rhs) {
-    return lhs.category == rhs.category && lhs.amount == rhs.amount;
+bool operator==(const Spending& lhs, const Spending& rhs) {
+  return lhs.category == rhs.category && lhs.amount == rhs.amount;
 }
 
-ostream& operator << (ostream& os, const Spending& s) {
-    return os << '(' << s.category << ": " << s.amount << ')';
+ostream& operator<<(ostream& os, const Spending& s) {
+  return os << '(' << s.category << ": " << s.amount << ')';
 }
 
-int CalculateTotalSpendings(
-        const vector<Spending>& spendings
-        ) {
-    int result = 0;
-    for (const Spending& s : spendings) {
-        result += s.amount;
-    }
-    return result;
+int CalculateTotalSpendings(const vector<Spending>& spendings) {
+  int result = 0;
+  for (const Spending& s : spendings) {
+    result += s.amount;
+  }
+  return result;
 }
 
-string MostExpensiveCategory(
-        const vector<Spending>& spendings
-        ) {
-    auto compare_by_amount =
-            [](const Spending& lhs, const Spending& rhs) {
-        return lhs.amount < rhs.amount;
-    };
-    return max_element(begin(spendings), end(spendings),
-                       compare_by_amount)->category;
+string MostExpensiveCategory(const vector<Spending>& spendings) {
+  auto compare_by_amount = [](const Spending& lhs, const Spending& rhs) {
+    return lhs.amount < rhs.amount;
+  };
+  return max_element(begin(spendings), end(spendings), compare_by_amount)
+      ->category;
 }
 
 vector<Spending> LoadFromJson(istream& input) {
-    const auto doc = Json::Load(input);
-    vector<Spending> result;
-    for(const auto& node : doc.GetRoot().AsArray()) {
-        result.push_back({node.AsMap().at("category").AsString(),
-                          node.AsMap().at("amount").AsInt()});
-    }
-    return result;
- }
+  const auto doc = Json::Load(input);
+  vector<Spending> result;
+  for (const auto& node : doc.GetRoot().AsArray()) {
+    result.push_back({node.AsMap().at("category").AsString(),
+                      node.AsMap().at("amount").AsInt()});
+  }
+  return result;
+}
 
 void TestLoadFromJson() {
-    istringstream json_input(R"([
+  istringstream json_input(R"([
                              {"amount": 2500, "category": "food"},
                              {"amount": 1150, "category": "transport"},
                              {"amount": 5780, "category": "restaurants"},
@@ -61,50 +56,46 @@ void TestLoadFromJson() {
                              {"amount": 12000, "category": "sport"}
                              ])");
 
-    const vector<Spending> spendings = LoadFromJson(json_input);
+  const vector<Spending> spendings = LoadFromJson(json_input);
 
-    const vector<Spending> expected = {
-        {"food", 2500},
-        {"transport", 1150},
-        {"restaurants", 5780},
-        {"clothes", 7500},
-        {"travel", 23740},
-        {"sport", 12000}
-    };
-    ASSERT_EQUAL(spendings, expected);
+  const vector<Spending> expected = {{"food", 2500},        {"transport", 1150},
+                                     {"restaurants", 5780}, {"clothes", 7500},
+                                     {"travel", 23740},     {"sport", 12000}};
+  ASSERT_EQUAL(spendings, expected);
 }
 
 void TestJsonLibrary() {
-    // Тест демонстрирует, как пользоваться библиотекой из файла json.h
+  // Тест демонстрирует, как пользоваться библиотекой из файла json.h
 
-    istringstream json_input(R"([
+  istringstream json_input(R"([
                              {"amount": 2500, "category": "food"},
                              {"amount": 1150, "category": "transport"},
                              {"amount": 12000, "category": "sport"}
                              ])");
 
-    using Node = Json::Node;
-    using Document = Json::Document;
+  using Node = Json::Node;
+  using Document = Json::Document;
 
-    Document doc = Json::Load(json_input);
-    const vector<Node>& root = doc.GetRoot().AsArray();
-    ASSERT_EQUAL(root.size(), 3u);
+  Document doc = Json::Load(json_input);
+  const vector<Node>& root = doc.GetRoot().AsArray();
+  ASSERT_EQUAL(root.size(), 3u);
 
-    const map<string, Node>& food = root.front().AsMap();
-    ASSERT_EQUAL(food.at("category").AsString(), "food");
-    ASSERT_EQUAL(food.at("amount").AsInt(), 2500);
+  const map<string, Node>& food = root.front().AsMap();
+  ASSERT_EQUAL(food.at("category").AsString(), "food");
+  ASSERT_EQUAL(food.at("amount").AsInt(), 2500);
 
-    const map<string, Node>& sport = root.back().AsMap();
-    ASSERT_EQUAL(sport.at("category").AsString(), "sport");
-    ASSERT_EQUAL(sport.at("amount").AsInt(), 12000);
+  const map<string, Node>& sport = root.back().AsMap();
+  ASSERT_EQUAL(sport.at("category").AsString(), "sport");
+  ASSERT_EQUAL(sport.at("amount").AsInt(), 12000);
 
-    Node transport(map<string, Node>{{"category", Node("transport")}, {"amount", Node(1150)}});
-    Node array_node(vector<Node>{transport});
-    ASSERT_EQUAL(array_node.AsArray().size(), 1u);
+  Node transport(map<string, Node>{{"category", Node("transport")},
+                                   {"amount", Node(1150)}});
+  Node array_node(vector<Node>{transport});
+  ASSERT_EQUAL(array_node.AsArray().size(), 1u);
 }
 
 int main() {
-    TestRunner tr;
-    RUN_TEST(tr, TestJsonLibrary);
-    RUN_TEST(tr, TestLoadFromJson);
+  TestRunner tr;
+  RUN_TEST(tr, TestJsonLibrary);
+  RUN_TEST(tr, TestLoadFromJson);
 }

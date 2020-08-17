@@ -1,7 +1,7 @@
 #include "xml.h"
 
-#include <string_view>
 #include <iostream>
+#include <string_view>
 using namespace std;
 
 namespace Xml {
@@ -39,7 +39,7 @@ Node LoadNode(istream& input) {
   getline(input, root_name);
 
   Node root(root_name.substr(1, root_name.size() - 2), {});
-  for (string line; getline(input, line) && line[1] != '/'; ) {
+  for (string line; getline(input, line) && line[1] != '/';) {
     auto [node_name, attrs] = Split(Lstrip(line), ' ');
     attrs = Split(attrs, '>').first;
     unordered_map<string, string> node_attrs;
@@ -61,17 +61,14 @@ Document Load(istream& input) {
   return Document{LoadNode(input)};
 }
 
-Node::Node(
-  string name, unordered_map<string, string> attrs
-) : name(move(name)), attrs(move(attrs)) {
-}
+Node::Node(string name, unordered_map<string, string> attrs)
+    : name(move(name)), attrs(move(attrs)) {}
 
 const vector<Node>& Node::Children() const {
   return children;
 }
 
-Document::Document(Node root) : root(move(root)) {
-}
+Document::Document(Node root) : root(move(root)) {}
 
 const Node& Document::GetRoot() const {
   return root;
@@ -85,4 +82,4 @@ string_view Node::Name() const {
   return name;
 }
 
-}
+}  // namespace Xml

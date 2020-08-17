@@ -1,15 +1,15 @@
 #pragma once
 
 #include <istream>
-#include <vector>
+#include <map>
 #include <string>
 #include <unordered_map>
-#include <map>
+#include <vector>
 
 namespace Json {
 
 class Node {
-public:
+ public:
   explicit Node(std::vector<Node> array);
   explicit Node(std::map<std::string, Node> map);
   explicit Node(int value);
@@ -20,7 +20,7 @@ public:
   int AsInt() const;
   const std::string& AsString() const;
 
-private:
+ private:
   std::vector<Node> as_array;
   std::map<std::string, Node> as_map;
   int as_int;
@@ -28,15 +28,15 @@ private:
 };
 
 class Document {
-public:
+ public:
   explicit Document(Node root);
 
   const Node& GetRoot() const;
 
-private:
+ private:
   Node root;
 };
 
 Document Load(std::istream& input);
 
-}
+}  // namespace Json

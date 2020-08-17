@@ -5,7 +5,7 @@
 
 // Базовый класс арифметического выражения
 class Expression {
-public:
+ public:
   virtual ~Expression() = default;
 
   // Вычисляет значение выражения
