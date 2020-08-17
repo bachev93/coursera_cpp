@@ -3,16 +3,13 @@
 #include <chrono>
 #include <iostream>
 #include <optional>
-#include <string>
 #include <sstream>
+#include <string>
 
 class LogDuration {
-public:
+ public:
   explicit LogDuration(const std::string& msg = "")
-    : message(msg + ": ")
-    , start(std::chrono::steady_clock::now())
-  {
-  }
+      : message(msg + ": "), start(std::chrono::steady_clock::now()) {}
 
   ~LogDuration() {
     auto finish = std::chrono::steady_clock::now();
@@ -23,16 +20,15 @@ public:
        << " ms" << std::endl;
     std::cerr << os.str();
   }
-private:
+
+ private:
   std::string message;
   std::chrono::steady_clock::time_point start;
 };
 
 #ifndef UNIQ_ID
-  #define UNIQ_ID_IMPL(lineno) _a_local_var_##lineno
-  #define UNIQ_ID(lineno) UNIQ_ID_IMPL(lineno)
+#define UNIQ_ID_IMPL(lineno) _a_local_var_##lineno
+#define UNIQ_ID(lineno) UNIQ_ID_IMPL(lineno)
 #endif
 
-#define LOG_DURATION(message) \
-  LogDuration UNIQ_ID(__LINE__){message};
-
+#define LOG_DURATION(message) LogDuration UNIQ_ID(__LINE__){message};

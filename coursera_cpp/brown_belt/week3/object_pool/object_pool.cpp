@@ -2,95 +2,94 @@
 
 #include <algorithm>
 #include <iostream>
-#include <string>
 #include <queue>
-#include <stdexcept>
 #include <set>
+#include <stdexcept>
+#include <string>
 
 using namespace std;
-
 
 // Это авторское решение задачи "Пул объектов"
 
 template <class T>
 class ObjectPool {
-public:
-    T* Allocate();
-    T* TryAllocate();
+ public:
+  T* Allocate();
+  T* TryAllocate();
 
-    void Deallocate(T* object);
+  void Deallocate(T* object);
 
-    ~ObjectPool();
+  ~ObjectPool();
 
-private:
-    queue<T*> free;
-    set<T*> allocated;
+ private:
+  queue<T*> free;
+  set<T*> allocated;
 };
 
 template <typename T>
 T* ObjectPool<T>::Allocate() {
-    if (free.empty()) {
-        free.push(new T);
-    }
-    auto ret = free.front();
-    free.pop();
-    allocated.insert(ret);
-    return ret;
+  if (free.empty()) {
+    free.push(new T);
+  }
+  auto ret = free.front();
+  free.pop();
+  allocated.insert(ret);
+  return ret;
 }
 
 template <typename T>
 T* ObjectPool<T>::TryAllocate() {
-    if (free.empty()) {
-        return nullptr;
-    }
-    return Allocate();
+  if (free.empty()) {
+    return nullptr;
+  }
+  return Allocate();
 }
 
 template <typename T>
 void ObjectPool<T>::Deallocate(T* object) {
-    if (allocated.find(object) == allocated.end()) {
-        throw invalid_argument("");
-    }
-    allocated.erase(object);
-    free.push(object);
+  if (allocated.find(object) == allocated.end()) {
+    throw invalid_argument("");
+  }
+  allocated.erase(object);
+  free.push(object);
 }
 
 template <typename T>
 ObjectPool<T>::~ObjectPool() {
-    for (auto x : allocated) {
-        delete x;
-    }
-    while (!free.empty()) {
-        auto x = free.front();
-        free.pop();
-        delete x;
-    }
+  for (auto x : allocated) {
+    delete x;
+  }
+  while (!free.empty()) {
+    auto x = free.front();
+    free.pop();
+    delete x;
+  }
 }
 
 void TestObjectPool() {
-    ObjectPool<string> pool;
+  ObjectPool<string> pool;
 
-    auto p1 = pool.Allocate();
-    auto p2 = pool.Allocate();
-    auto p3 = pool.Allocate();
+  auto p1 = pool.Allocate();
+  auto p2 = pool.Allocate();
+  auto p3 = pool.Allocate();
 
-    *p1 = "first";
-    *p2 = "second";
-    *p3 = "third";
+  *p1 = "first";
+  *p2 = "second";
+  *p3 = "third";
 
-    pool.Deallocate(p2);
-    ASSERT_EQUAL(*pool.Allocate(), "second");
+  pool.Deallocate(p2);
+  ASSERT_EQUAL(*pool.Allocate(), "second");
 
-    pool.Deallocate(p3);
-    pool.Deallocate(p1);
-    ASSERT_EQUAL(*pool.Allocate(), "third");
-    ASSERT_EQUAL(*pool.Allocate(), "first");
+  pool.Deallocate(p3);
+  pool.Deallocate(p1);
+  ASSERT_EQUAL(*pool.Allocate(), "third");
+  ASSERT_EQUAL(*pool.Allocate(), "first");
 
-    pool.Deallocate(p1);
+  pool.Deallocate(p1);
 }
 
 int main() {
-    TestRunner tr;
-    RUN_TEST(tr, TestObjectPool);
-    return 0;
+  TestRunner tr;
+  RUN_TEST(tr, TestObjectPool);
+  return 0;
 }

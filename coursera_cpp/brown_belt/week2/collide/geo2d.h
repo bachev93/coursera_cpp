@@ -5,50 +5,48 @@
 namespace geo2d {
 
 struct Point {
-    int x, y;
+  int x, y;
 };
 
 uint64_t DistanceSquared(Point p1, Point p2);
 
 struct Vector {
-    int x, y;
+  int x, y;
 
-    Vector(int xx, int yy) : x(xx), y(yy) {
-    }
+  Vector(int xx, int yy) : x(xx), y(yy) {}
 
-    Vector(Point from, Point to) : x(to.x - from.x), y(to.y - from.y) {
-    }
+  Vector(Point from, Point to) : x(to.x - from.x), y(to.y - from.y) {}
 };
 
-int64_t operator * (Vector lhs, Vector rhs);
+int64_t operator*(Vector lhs, Vector rhs);
 int64_t ScalarProduct(Vector lhs, Vector rhs);
 
 struct Segment {
-    Point p1, p2;
+  Point p1, p2;
 };
 
 class Rectangle {
-private:
-    int x_left, x_right;
-    int y_bottom, y_top;
+ private:
+  int x_left, x_right;
+  int y_bottom, y_top;
 
-public:
-    Rectangle(Point p1, Point p2);
+ public:
+  Rectangle(Point p1, Point p2);
 
-    int Left() const { return x_left; }
-    int Right() const { return x_right; }
-    int Top() const { return y_top; }
-    int Bottom() const { return y_bottom; }
+  int Left() const { return x_left; }
+  int Right() const { return x_right; }
+  int Top() const { return y_top; }
+  int Bottom() const { return y_bottom; }
 
-    Point BottomLeft() const { return {x_left, y_bottom}; }
-    Point BottomRight() const { return {x_right, y_bottom}; }
-    Point TopRight() const { return {x_right, y_top}; }
-    Point TopLeft() const { return {x_left, y_top}; }
+  Point BottomLeft() const { return {x_left, y_bottom}; }
+  Point BottomRight() const { return {x_right, y_bottom}; }
+  Point TopRight() const { return {x_right, y_top}; }
+  Point TopLeft() const { return {x_left, y_top}; }
 };
 
 struct Circle {
-    Point center;
-    uint32_t radius;
+  Point center;
+  uint32_t radius;
 };
 
 bool Collide(Point p, Point q);
@@ -68,4 +66,4 @@ bool Collide(Circle c, Rectangle r);
 bool Collide(Circle c, Segment s);
 bool Collide(Circle c1, Circle c2);
 
-}
+}  // namespace geo2d

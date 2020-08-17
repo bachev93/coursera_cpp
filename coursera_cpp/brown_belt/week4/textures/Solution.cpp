@@ -14,27 +14,17 @@ Size GetImageSize(const Image& image) {
 }
 
 class Shape : public IShape {
-public:
-  void SetPosition(Point position) override {
-    position_ = position;
-  }
-  Point GetPosition() const override {
-    return position_;
-  }
+ public:
+  void SetPosition(Point position) override { position_ = position; }
+  Point GetPosition() const override { return position_; }
 
-  void SetSize(Size size) override {
-    size_ = size;
-  }
-  Size GetSize() const override {
-    return size_;
-  }
+  void SetSize(Size size) override { size_ = size; }
+  Size GetSize() const override { return size_; }
 
   void SetTexture(shared_ptr<ITexture> texture) override {
     texture_ = move(texture);
   }
-  ITexture* GetTexture() const override {
-    return texture_.get();
-  }
+  ITexture* GetTexture() const override { return texture_.get(); }
 
   void Draw(Image& image) const override {
     Point p;
@@ -55,7 +45,7 @@ public:
     }
   }
 
-private:
+ private:
   // Вызывается только для точек в ограничивающем прямоугольнике
   // Точка передаётся в локальных координатах
   virtual bool IsPointInShape(Point) const = 0;
@@ -66,24 +56,22 @@ private:
 };
 
 class Rectangle : public Shape {
-public:
+ public:
   unique_ptr<IShape> Clone() const override {
     return make_unique<Rectangle>(*this);
   }
 
-private:
-  bool IsPointInShape(Point) const override {
-    return true;
-  }
+ private:
+  bool IsPointInShape(Point) const override { return true; }
 };
 
 class Ellipse : public Shape {
-public:
+ public:
   unique_ptr<IShape> Clone() const override {
     return make_unique<Ellipse>(*this);
   }
 
-private:
+ private:
   bool IsPointInShape(Point p) const override {
     return IsPointInEllipse(p, GetSize());
   }

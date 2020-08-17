@@ -1,15 +1,15 @@
 #pragma once
 
-#include <string>
 #include <map>
+#include <string>
 #include <tuple>
 
 // Перечислимый тип для статуса задачи
 enum class TaskStatus {
-    NEW,          // новая
-    IN_PROGRESS,  // в разработке
-    TESTING,      // на тестировании
-    DONE          // завершена
+  NEW,          // новая
+  IN_PROGRESS,  // в разработке
+  TESTING,      // на тестировании
+  DONE          // завершена
 };
 
 // Объявляем тип-синоним для map<TaskStatus, int>,

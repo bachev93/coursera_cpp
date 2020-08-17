@@ -1,15 +1,15 @@
 #include <iomanip>
 #include <iostream>
-#include <vector>
-#include <utility>
 #include <map>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
 class ReadingManager {
-public:
+ public:
   ReadingManager()
-        // -1 значит, что не случилось ни одного READ
+      // -1 значит, что не случилось ни одного READ
       : user_page_counts_(MAX_USER_COUNT_ + 1, -1),
         page_achieved_by_count_(MAX_PAGE_COUNT_ + 1, 0) {}
 
@@ -30,11 +30,11 @@ public:
     // По умолчанию деление целочисленное, поэтому
     // нужно привести числитель к типу double.
     // Простой способ сделать это — умножить его на 1.0.
-    return (user_count - page_achieved_by_count_[pages_count]) * 1.0
-           / (user_count - 1);
+    return (user_count - page_achieved_by_count_[pages_count]) * 1.0 /
+           (user_count - 1);
   }
 
-private:
+ private:
   // Статическое поле не принадлежит какому-либо конкретному объекту класса.
   // По сути это глобальная переменная, в данном случае - константная.
   // Будь она публичной, к ней можно было бы обратиться снаружи
@@ -47,9 +47,7 @@ private:
   // Количество пользователей, дочитавших (как минимум) до страницы <индекс>
   vector<int> page_achieved_by_count_;
 
-  int GetUserCount() const {
-    return page_achieved_by_count_[0];
-  }
+  int GetUserCount() const { return page_achieved_by_count_[0]; }
 
   // lhs включительно, rhs не включительно
   void UpdatePageRange(int lhs, int rhs) {
@@ -58,7 +56,6 @@ private:
     }
   }
 };
-
 
 int main() {
   // Для ускорения чтения данных отключается синхронизация
