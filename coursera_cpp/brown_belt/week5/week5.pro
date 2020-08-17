@@ -11,4 +11,5 @@ SUBDIRS += \
     test_domains \
     budget_home_desktop \
     budget_professional_desktop \
-    budget_professional_mobile
+    budget_professional_mobile \
+    budget_mobile_legacy
