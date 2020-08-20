@@ -1,4 +1,5 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    transport_a
+    transport_a \
+    transport_b
