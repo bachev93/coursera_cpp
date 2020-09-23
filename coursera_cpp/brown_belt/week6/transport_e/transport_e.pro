@@ -4,11 +4,13 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-    transport_d.cpp \
-    json.cpp
+    json.cpp \
+    transport_e.cpp
 
 HEADERS += \
-    json.h
+    json.h \
+    graph.h \
+    router.h
 
 unix:!macx: LIBS += -L$$OUT_PWD/../../brown_belt_lib/ -lbrown_belt_lib
 
